@@ -1,9 +1,9 @@
 const pass = '123456';
 const getPass = localStorage.getItem('password');
 
-if (getPass !== null) {
-    window.location.href = 'index.html';
-}
+// if (getPass !== null) {
+//     window.location.href = 'index.html';
+// }
 
 document.getElementById('myForm').addEventListener('submit', login);
 

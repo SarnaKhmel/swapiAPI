@@ -50,8 +50,6 @@ function showPeople() {
            <h5> ${people.height} <h5>
            <h6> ${people.olsa} </h6>
          </div>`;
-         
-        //  console.log("people", people )
     })
 }
 
@@ -75,40 +73,13 @@ fetch('https://swapi.dev/api/films')
     })
 
 
-
-    // console.log(hero)
-    // let human = [];
-    // hero.map((film, i) => {
-    //     if (i == 2) { 
-    //         console.log(film.characters);
-    //         human = human.concat(film);
-    //     }
-//     // })
-//     // console.log("ggghjk", human)
-
-
-// document.getElementById('btn3').addEventListener('click', showPeopleByFilms);
-// function showPeopleByFilms() {
-//     let somebody = '';
-//     axios.get('https://swapi.dev/api/films')
-//     .then(function(response) {
-//         console.log(response.data.characters);
-//         return somebody = a;
-//     })
-
-//     // axios.get(somebody)
-//     // .then(function(response) {
-//     //     console.log(response)
-//     // })
-
-// }
-
 document.getElementById('btn3').addEventListener('click', showPeopleByFilms);
 
 let somebody = null;
 axios.get('https://swapi.dev/api/films')
             .then((response)=>{
-                somebody =  response.data.results[2].characters;
+                somebody =  response.data.results[4].characters;
+                console.log(response.data);
                 console.log(somebody);
                 return somebody;
             })
@@ -117,18 +88,32 @@ axios.get('https://swapi.dev/api/films')
 function showPeopleByFilms() {
     console.log(somebody);
 
-    // for(let i = 0; i < somebody.length; ) {
-    //     axios.get(somebody[i])
-    //     .then(function(response){
-    //         console.log(response.name)
-    //     })
-   // }
-
-   somebody.map((some, index) => {
+let count = 1;
+   somebody.map((some) => {
         console.log(some)
         axios.get(some)
         .then(function(response) {
+            
             console.log(response.data.name)
+            console.log(response.data.gender)
+
+           
+            document.getElementById('return3').innerHTML += `<div class="actor"> `;
+            document.getElementById('return3').innerHTML += `${count}`
+            document.getElementById('return3').innerHTML += `${response.data.name} `;
+            document.getElementById('return3').innerHTML += `${response.data.birth_year}`
+            // document.getElementById('return3').innerHTML += `<image src="foto${index}">`
+            if (response.data.gender == 'male') {
+                document.getElementById('return3').innerHTML +=  `<i class="fa fa-mars" aria-hidden="true"></i>`
+            } else if (response.data.gender == 'female') {
+                document.getElementById('return3').innerHTML +=  `<i class="fa fa-venus" aria-hidden="true"></i>`
+            }else if (response.data.gender == 'none' || response.data.gender == 'n/a') {
+                document.getElementById('return3').innerHTML +=  `<i class="fa fa-question" aria-hidden="true"></i>
+                `
+            }
+            
+            document.getElementById('return2').innerHTML +=  `</div>`;
+            count++;
         })
    })
         
