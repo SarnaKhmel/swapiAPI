@@ -63,3 +63,73 @@ function claerInfo() {
     document.getElementById('return2').innerHTML = '';
 }
 
+
+
+let hero = null;
+fetch('https://swapi.dev/api/films')
+    .then((response) => {
+        return response.json();
+    })
+    .then((data) => { 
+        hero = data.results; 
+    })
+
+
+
+    // console.log(hero)
+    // let human = [];
+    // hero.map((film, i) => {
+    //     if (i == 2) { 
+    //         console.log(film.characters);
+    //         human = human.concat(film);
+    //     }
+//     // })
+//     // console.log("ggghjk", human)
+
+
+// document.getElementById('btn3').addEventListener('click', showPeopleByFilms);
+// function showPeopleByFilms() {
+//     let somebody = '';
+//     axios.get('https://swapi.dev/api/films')
+//     .then(function(response) {
+//         console.log(response.data.characters);
+//         return somebody = a;
+//     })
+
+//     // axios.get(somebody)
+//     // .then(function(response) {
+//     //     console.log(response)
+//     // })
+
+// }
+
+document.getElementById('btn3').addEventListener('click', showPeopleByFilms);
+
+let somebody = null;
+axios.get('https://swapi.dev/api/films')
+            .then((response)=>{
+                somebody =  response.data.results[2].characters;
+                console.log(somebody);
+                return somebody;
+            })
+
+
+function showPeopleByFilms() {
+    console.log(somebody);
+
+    // for(let i = 0; i < somebody.length; ) {
+    //     axios.get(somebody[i])
+    //     .then(function(response){
+    //         console.log(response.name)
+    //     })
+   // }
+
+   somebody.map((some, index) => {
+        console.log(some)
+        axios.get(some)
+        .then(function(response) {
+            console.log(response.data.name)
+        })
+   })
+        
+}
